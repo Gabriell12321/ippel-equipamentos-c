@@ -29,12 +29,14 @@ function App() {
         )
       )
       setEditingEquipment(undefined)
+      toast.success("Equipamento atualizado com sucesso!")
     } else {
       const newEquipment: Equipment = {
         ...equipmentData,
         id: Date.now().toString()
       }
       setEquipments(currentEquipments => [...(currentEquipments || []), newEquipment])
+      toast.success("Equipamento cadastrado com sucesso!")
     }
   }
 
@@ -44,9 +46,9 @@ function App() {
   }
 
   const handleDeleteEquipment = (id: string) => {
-    if (confirm("Tem certeza que deseja excluir este equipamento?")) {
+    if (confirm("Tem certeza que deseja excluir este equipamento? Esta ação não pode ser desfeita.")) {
       setEquipments(currentEquipments => (currentEquipments || []).filter(eq => eq.id !== id))
-      toast.success("Equipamento removido!")
+      toast.success("Equipamento removido com sucesso!")
     }
   }
 
@@ -57,13 +59,13 @@ function App() {
       requestDate: new Date().toISOString()
     }
     setPurchaseRequests(currentRequests => [...(currentRequests || []), newRequest])
-    toast.success("Solicitação de compra criada!")
+    toast.success("Solicitação de compra criada com sucesso!")
   }
 
   const handleDeletePurchaseRequest = (id: string) => {
-    if (confirm("Tem certeza que deseja excluir esta solicitação?")) {
+    if (confirm("Tem certeza que deseja excluir esta solicitação? Esta ação não pode ser desfeita.")) {
       setPurchaseRequests(currentRequests => (currentRequests || []).filter(req => req.id !== id))
-      toast.success("Solicitação removida!")
+      toast.success("Solicitação removida com sucesso!")
     }
   }
 
@@ -84,14 +86,29 @@ function App() {
         onNewPurchase={() => setPurchaseDialogOpen(true)}
       />
       
-      <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+      <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-8">
+        <div className="space-y-2">
+          <h2 className="text-2xl font-bold tracking-tight text-foreground">
+            Painel de Controle
+          </h2>
+          <p className="text-muted-foreground">
+            Visão geral dos equipamentos e solicitações de TI
+          </p>
+        </div>
+        
         <DashboardStats {...stats} />
         
         <Tabs defaultValue="equipments" className="space-y-6">
-          <TabsList className="grid w-full grid-cols-3 lg:w-auto lg:max-w-lg mx-auto">
-            <TabsTrigger value="equipments">Equipamentos</TabsTrigger>
-            <TabsTrigger value="purchases">Solicitações</TabsTrigger>
-            <TabsTrigger value="reminders">Lembretes</TabsTrigger>
+          <TabsList className="grid w-full grid-cols-3 lg:w-auto lg:max-w-lg mx-auto bg-muted/50">
+            <TabsTrigger value="equipments" className="data-[state=active]:bg-white data-[state=active]:shadow-sm">
+              Equipamentos
+            </TabsTrigger>
+            <TabsTrigger value="purchases" className="data-[state=active]:bg-white data-[state=active]:shadow-sm">
+              Solicitações
+            </TabsTrigger>
+            <TabsTrigger value="reminders" className="data-[state=active]:bg-white data-[state=active]:shadow-sm">
+              Lembretes
+            </TabsTrigger>
           </TabsList>
           
           <TabsContent value="equipments" className="space-y-6">
@@ -128,7 +145,13 @@ function App() {
         onSave={handleSavePurchaseRequest}
       />
       
-      <Toaster />
+      <Toaster 
+        position="top-right" 
+        expand={false}
+        toastOptions={{
+          duration: 4000,
+        }}
+      />
     </div>
   )
 }

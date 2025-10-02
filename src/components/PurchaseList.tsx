@@ -95,7 +95,6 @@ export function PurchaseList({ requests, onDelete }: PurchaseListProps) {
                     </p>
                   </div>
                   <div className="flex flex-col gap-2">
-                    {getPriorityBadge(request.priority)}
                   </div>
                 </div>
               </CardHeader>

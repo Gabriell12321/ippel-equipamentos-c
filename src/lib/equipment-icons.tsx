@@ -1,224 +1,123 @@
 import { 
-  Monitor, 
-  Desktop, 
-  HardDrive, 
-  Circle, 
-  GraphicsCard, 
-  Lightning, 
-  Keyboard, 
-  Mouse, 
-  Usb, 
-  Gear, 
-  Plug, 
-  Wrench, 
+  Desktop,
   Laptop,
-  Globe,
+  Monitor,
   WifiHigh,
-  SpeakerHigh,
-  Camera,
   Printer,
-  FilePdf,
-  Database,
-  DeviceTablet,
   Phone,
-  ProjectorScreen,
-  Headphones,
-  ShieldCheck,
+  SpeakerHigh,
+  HardDrives,
   Cpu,
-  Fan,
-  Package
+  Keyboard,
+  Mouse,
+  GameController,
+  Camera,
+  DeviceTablet,
+  Television,
+  DeviceMobile,
+  PuzzlePiece
 } from "@phosphor-icons/react"
 
-export function getEquipmentIcon(type: string, className?: string) {
-  const iconMap: Record<string, React.ComponentType<any>> = {
-    // Computadores e Componentes
-    desktop: Desktop,
-    notebook: Laptop,
-    'memoria-ram': Circle,
-    ssd: HardDrive,
-    hd: HardDrive,
-    'placa-video': GraphicsCard,
-    fonte: Lightning,
-    'placa-rede': Globe,
-    processador: Cpu,
-    
-    // Monitores e Acessórios
-    monitor: Monitor,
-    'suporte-monitor': Gear,
-    
-    // Cabos de Vídeo
-    'cabo-hdmi': Gear,
-    'cabo-displayport': Gear,
-    'cabo-vga': Gear,
-    'cabo-dvi': Gear,
-    
-    // Adaptadores de Vídeo
-    'hdmi-vga': Plug,
-    'vga-hdmi': Plug,
-    'displayport-hdmi': Plug,
-    'displayport-vga': Plug,
-    'usbc-hdmi': Plug,
-    'dvi-hdmi': Plug,
-    
-    // Periféricos
-    teclado: Keyboard,
-    mouse: Mouse,
-    mousepad: Circle,
-    webcam: Camera,
-    headset: Headphones,
-    'caixa-som': SpeakerHigh,
-    
-    // Armazenamento e Mídias
-    pendrive: Usb,
-    'cartao-memoria': Circle,
-    'hd-externo': HardDrive,
-    'ssd-externo': HardDrive,
-    
-    // Rede e Conectividade
-    switch: Globe,
-    'access-point': WifiHigh,
-    'repetidor-wifi': WifiHigh,
-    roteador: Globe,
-    
-    // Cabos e Conectores
-    'cabo-rede': Gear,
-    'conector-rj45': Gear,
-    'patch-panel': Gear,
-    'usb-ethernet': Usb,
-    'extensor-sinal': Gear,
-    
-    // Energia e Manutenção
-    nobreak: Lightning,
-    estabilizador: Lightning,
-    'filtro-linha': Plug,
-    
-    // Ferramentas e Manutenção
-    'kit-chaves': Wrench,
-    'pasta-termica': Circle,
-    'spray-limpeza': Circle,
-    'alcool-isopropilico': Circle,
-    'escova-antiestatica': Wrench,
-    
-    // Diversos
-    'suporte-notebook': Laptop,
-    'dock-station': Gear,
-    'hub-usb': Usb,
-    'cooler-notebook': Fan,
-    'antena-wifi-usb': WifiHigh,
-    'limpa-tela': Circle,
-    impressora: Printer,
-    scanner: FilePdf,
-    projetor: ProjectorScreen,
-    tablet: DeviceTablet,
-    smartphone: Phone,
-    servidor: Database,
-    
-    // Legacy types (keeping for backwards compatibility)
-    Desktop: Desktop,
-    Notebook: Laptop,
-    Monitor: Monitor,
-    Impressora: Printer,
-    Scanner: FilePdf,
-    Servidor: Database,
-    Switch: Globe,
-    Roteador: Globe,
-    'Access Point': WifiHigh,
-    Tablet: DeviceTablet,
-    Smartphone: Phone,
-    Projetor: ProjectorScreen,
-    Webcam: Camera,
-    Headset: Headphones,
-    Outros: Package
-  }
+export type EquipmentType = 
+  | "desktop"
+  | "laptop"
+  | "monitor"
+  | "router"
+  | "printer"
+  | "phone"
+  | "speaker"
+  | "storage"
+  | "server"
+  | "keyboard"
+  | "mouse"
+  | "gamepad"
+  | "camera"
+  | "tablet"
+  | "tv"
+  | "mobile"
+  | "other"
+
+export function getEquipmentIcon(type: EquipmentType, size = 16, weight: "regular" | "bold" = "regular") {
+  const iconProps = { size, weight, className: "text-muted-foreground" }
   
-  const IconComponent = iconMap[type] || Package
-  return <IconComponent className={className || "w-4 h-4"} />
+  switch (type) {
+    case "desktop":
+      return <Desktop {...iconProps} />
+    case "laptop":
+      return <Laptop {...iconProps} />
+    case "monitor":
+      return <Monitor {...iconProps} />
+    case "router":
+      return <WifiHigh {...iconProps} />
+    case "printer":
+      return <Printer {...iconProps} />
+    case "phone":
+      return <Phone {...iconProps} />
+    case "speaker":
+      return <SpeakerHigh {...iconProps} />
+    case "storage":
+      return <HardDrives {...iconProps} />
+    case "server":
+      return <Cpu {...iconProps} />
+    case "keyboard":
+      return <Keyboard {...iconProps} />
+    case "mouse":
+      return <Mouse {...iconProps} />
+    case "gamepad":
+      return <GameController {...iconProps} />
+    case "camera":
+      return <Camera {...iconProps} />
+    case "tablet":
+      return <DeviceTablet {...iconProps} />
+    case "tv":
+      return <Television {...iconProps} />
+    case "mobile":
+      return <DeviceMobile {...iconProps} />
+    default:
+      return <PuzzlePiece {...iconProps} />
+  }
 }
 
-export function getEquipmentTypeLabel(value: string): string {
-  const labelMap: Record<string, string> = {
-    // Computadores e Componentes
+export function getEquipmentTypeLabel(type: EquipmentType): string {
+  const labels = {
     desktop: "Desktop",
-    notebook: "Notebook",
-    'memoria-ram': "Memória RAM",
-    ssd: "SSD",
-    hd: "HD",
-    'placa-video': "Placa de Vídeo",
-    fonte: "Fonte de Alimentação",
-    'placa-rede': "Placa de Rede",
-    processador: "Processador",
-    
-    // Monitores e Acessórios
+    laptop: "Notebook",
     monitor: "Monitor",
-    'suporte-monitor': "Suporte para Monitor",
-    
-    // Cabos de Vídeo
-    'cabo-hdmi': "Cabo HDMI",
-    'cabo-displayport': "Cabo DisplayPort",
-    'cabo-vga': "Cabo VGA",
-    'cabo-dvi': "Cabo DVI",
-    
-    // Adaptadores de Vídeo
-    'hdmi-vga': "HDMI para VGA",
-    'vga-hdmi': "VGA para HDMI",
-    'displayport-hdmi': "DisplayPort para HDMI",
-    'displayport-vga': "DisplayPort para VGA",
-    'usbc-hdmi': "USB-C para HDMI",
-    'dvi-hdmi': "DVI para HDMI",
-    
-    // Periféricos
-    teclado: "Teclado",
+    router: "Roteador",
+    printer: "Impressora",
+    phone: "Telefone",
+    speaker: "Alto-falante",
+    storage: "Armazenamento",
+    server: "Servidor",
+    keyboard: "Teclado",
     mouse: "Mouse",
-    mousepad: "Mousepad",
-    webcam: "Webcam",
-    headset: "Headset",
-    'caixa-som': "Caixa de Som",
-    
-    // Armazenamento e Mídias
-    pendrive: "Pendrive",
-    'cartao-memoria': "Cartão de Memória",
-    'hd-externo': "HD Externo",
-    'ssd-externo': "SSD Externo",
-    
-    // Rede e Conectividade
-    switch: "Switch de Rede",
-    'access-point': "Access Point",
-    'repetidor-wifi': "Repetidor Wi-Fi",
-    roteador: "Roteador",
-    
-    // Cabos e Conectores
-    'cabo-rede': "Cabo de Rede RJ-45",
-    'conector-rj45': "Conector RJ-45",
-    'patch-panel': "Patch Panel",
-    'usb-ethernet': "Adaptador USB Ethernet",
-    'extensor-sinal': "Extensor de Sinal",
-    
-    // Energia e Manutenção
-    nobreak: "Nobreak",
-    estabilizador: "Estabilizador",
-    'filtro-linha': "Filtro de Linha",
-    
-    // Ferramentas e Manutenção
-    'kit-chaves': "Kit de Chaves para PC",
-    'pasta-termica': "Pasta Térmica",
-    'spray-limpeza': "Spray de Limpeza",
-    'alcool-isopropilico': "Álcool Isopropílico",
-    'escova-antiestatica': "Escova Antiestática",
-    
-    // Diversos
-    'suporte-notebook': "Suporte para Notebook",
-    'dock-station': "Dock Station",
-    'hub-usb': "Hub USB",
-    'cooler-notebook': "Cooler para Notebook",
-    'antena-wifi-usb': "Antena Wi-Fi USB",
-    'limpa-tela': "Limpa Tela",
-    impressora: "Impressora",
-    scanner: "Scanner",
-    projetor: "Projetor",
+    gamepad: "Controle",
+    camera: "Câmera",
     tablet: "Tablet",
-    smartphone: "Smartphone",
-    servidor: "Servidor"
+    tv: "TV",
+    mobile: "Celular",
+    other: "Outro"
   }
   
-  return labelMap[value] || value
+  return labels[type] || "Outro"
 }
+
+export const equipmentTypes: { value: EquipmentType; label: string }[] = [
+  { value: "desktop", label: "Desktop" },
+  { value: "laptop", label: "Notebook" },
+  { value: "monitor", label: "Monitor" },
+  { value: "router", label: "Roteador" },
+  { value: "printer", label: "Impressora" },
+  { value: "phone", label: "Telefone" },
+  { value: "speaker", label: "Alto-falante" },
+  { value: "storage", label: "Armazenamento" },
+  { value: "server", label: "Servidor" },
+  { value: "keyboard", label: "Teclado" },
+  { value: "mouse", label: "Mouse" },
+  { value: "gamepad", label: "Controle" },
+  { value: "camera", label: "Câmera" },
+  { value: "tablet", label: "Tablet" },
+  { value: "tv", label: "TV" },
+  { value: "mobile", label: "Celular" },
+  { value: "other", label: "Outro" }
+]

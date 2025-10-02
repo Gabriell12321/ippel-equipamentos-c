@@ -12,25 +12,29 @@
 }
 
 :root {
-  --background: oklch(0.99 0 0);
-  --foreground: oklch(0.2 0 0);
+  --background: oklch(0.98 0.005 260);
+  --foreground: oklch(0.15 0.02 260);
   --card: oklch(1 0 0);
-  --card-foreground: oklch(0.2 0 0);
+  --card-foreground: oklch(0.15 0.02 260);
   --popover: oklch(1 0 0);
-  --popover-foreground: oklch(0.2 0 0);
-  --primary: oklch(0.55 0.22 25);
-  --primary-foreground: oklch(1 0 0);
-  --secondary: oklch(0.95 0 0);
-  --secondary-foreground: oklch(0.2 0 0);
-  --muted: oklch(0.97 0 0);
-  --muted-foreground: oklch(0.45 0 0);
-  --accent: oklch(0.6 0.15 145);
-  --accent-foreground: oklch(1 0 0);
-  --destructive: oklch(0.6 0.22 25);
-  --destructive-foreground: oklch(1 0 0);
-  --border: oklch(0.9 0 0);
-  --input: oklch(0.9 0 0);
-  --ring: oklch(0.55 0.22 25);
+  --popover-foreground: oklch(0.15 0.02 260);
+  --primary: oklch(0.58 0.18 25);
+  --primary-foreground: oklch(0.98 0.005 260);
+  --secondary: oklch(0.95 0.01 260);
+  --secondary-foreground: oklch(0.15 0.02 260);
+  --muted: oklch(0.96 0.008 260);
+  --muted-foreground: oklch(0.48 0.01 260);
+  --accent: oklch(0.64 0.16 150);
+  --accent-foreground: oklch(0.98 0.005 260);
+  --destructive: oklch(0.62 0.22 25);
+  --destructive-foreground: oklch(0.98 0.005 260);
+  --warning: oklch(0.68 0.18 55);
+  --warning-foreground: oklch(0.98 0.005 260);
+  --success: oklch(0.64 0.16 150);
+  --success-foreground: oklch(0.98 0.005 260);
+  --border: oklch(0.88 0.01 260);
+  --input: oklch(0.88 0.01 260);
+  --ring: oklch(0.58 0.18 25);
   --radius: 0.75rem;
 }
 
@@ -51,6 +55,10 @@
   --color-accent-foreground: var(--accent-foreground);
   --color-destructive: var(--destructive);
   --color-destructive-foreground: var(--destructive-foreground);
+  --color-warning: var(--warning);
+  --color-warning-foreground: var(--warning-foreground);
+  --color-success: var(--success);
+  --color-success-foreground: var(--success-foreground);
   --color-border: var(--border);
   --color-input: var(--input);
   --color-ring: var(--ring);

@@ -7,6 +7,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { Textarea } from "@/components/ui/textarea"
 import { Badge } from "@/components/ui/badge"
 import { toast } from "sonner"
+import { equipmentTypes, type EquipmentType } from "@/lib/equipment-icons"
 import { 
   Monitor, 
   Desktop, 
@@ -41,7 +42,7 @@ import {
 export interface Equipment {
   id: string
   name: string
-  type: string
+  type: EquipmentType
   brand: string
   model: string
   serialNumber: string
@@ -62,7 +63,7 @@ interface EquipmentDialogProps {
 export function EquipmentDialog({ open, onOpenChange, onSave, equipment }: EquipmentDialogProps) {
   const [formData, setFormData] = useState<Omit<Equipment, "id">>({
     name: equipment?.name || "",
-    type: equipment?.type || "",
+    type: equipment?.type || "other",
     brand: equipment?.brand || "",
     model: equipment?.model || "",
     serialNumber: equipment?.serialNumber || "",
@@ -88,7 +89,7 @@ export function EquipmentDialog({ open, onOpenChange, onSave, equipment }: Equip
     if (!equipment) {
       setFormData({
         name: "",
-        type: "",
+        type: "other",
         brand: "",
         model: "",
         serialNumber: "",
@@ -270,27 +271,16 @@ export function EquipmentDialog({ open, onOpenChange, onSave, equipment }: Equip
               <Label htmlFor="type">Tipo *</Label>
               <Select
                 value={formData.type}
-                onValueChange={(value) => setFormData(prev => ({ ...prev, type: value }))}
+                onValueChange={(value: EquipmentType) => setFormData(prev => ({ ...prev, type: value }))}
               >
                 <SelectTrigger>
                   <SelectValue placeholder="Selecione o tipo" />
                 </SelectTrigger>
                 <SelectContent className="max-h-80">
-                  {equipmentCategories.map((category) => (
-                    <div key={category.category}>
-                      <div className="px-2 py-1.5 text-sm font-semibold text-muted-foreground bg-muted/50 flex items-center gap-2">
-                        {category.icon}
-                        {category.category}
-                      </div>
-                      {category.items.map((item) => (
-                        <SelectItem key={item.value} value={item.value} className="pl-6">
-                          <div className="flex items-center gap-2">
-                            {item.icon}
-                            {item.label}
-                          </div>
-                        </SelectItem>
-                      ))}
-                    </div>
+                  {equipmentTypes.map((type) => (
+                    <SelectItem key={type.value} value={type.value}>
+                      {type.label}
+                    </SelectItem>
                   ))}
                 </SelectContent>
               </Select>
