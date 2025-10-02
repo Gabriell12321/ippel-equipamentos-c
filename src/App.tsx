@@ -13,7 +13,7 @@ import { toast } from "sonner"
 
 function App() {
   const [equipments, setEquipments] = useKV<Equipment[]>("equipments", [])
-  const [purchaseRequests, setPurchaseRequests] = useKV<PurchaseRequest[]>("purchase-requests", [])
+  const [purchaseRequests, setPurchaseRequests] = useKV<PurchaseRequest[]>("purchaseRequests", [])
   
   const [equipmentDialogOpen, setEquipmentDialogOpen] = useState(false)
   const [purchaseDialogOpen, setPurchaseDialogOpen] = useState(false)
@@ -58,6 +58,7 @@ function App() {
       requestDate: new Date().toISOString()
     }
     setPurchaseRequests(currentRequests => [...(currentRequests || []), newRequest])
+    toast.success("Solicitação de compra criada!")
   }
 
   const handleApprovePurchase = (id: string) => {
@@ -99,7 +100,7 @@ function App() {
         <DashboardStats {...stats} />
         
         <Tabs defaultValue="equipments" className="space-y-6">
-          <TabsList className="grid w-full grid-cols-3 lg:w-600">
+          <TabsList className="grid w-full grid-cols-3 lg:w-auto lg:max-w-lg mx-auto">
             <TabsTrigger value="equipments">Equipamentos</TabsTrigger>
             <TabsTrigger value="purchases">Solicitações</TabsTrigger>
             <TabsTrigger value="reminders">Lembretes</TabsTrigger>
