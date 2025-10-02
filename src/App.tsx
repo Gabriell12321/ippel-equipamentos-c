@@ -8,6 +8,7 @@ import { EquipmentList } from "@/components/EquipmentList"
 import { EquipmentDialog, type Equipment } from "@/components/EquipmentDialog"
 import { PurchaseList } from "@/components/PurchaseList"
 import { PurchaseDialog, type PurchaseRequest } from "@/components/PurchaseDialog"
+import { ReminderSystem } from "@/components/ReminderSystem"
 import { toast } from "sonner"
 
 function App() {
@@ -98,9 +99,10 @@ function App() {
         <DashboardStats {...stats} />
         
         <Tabs defaultValue="equipments" className="space-y-6">
-          <TabsList className="grid w-full grid-cols-2 lg:w-400">
+          <TabsList className="grid w-full grid-cols-3 lg:w-600">
             <TabsTrigger value="equipments">Equipamentos</TabsTrigger>
             <TabsTrigger value="purchases">Solicitações</TabsTrigger>
+            <TabsTrigger value="reminders">Lembretes</TabsTrigger>
           </TabsList>
           
           <TabsContent value="equipments" className="space-y-6">
@@ -117,6 +119,10 @@ function App() {
               onApprove={handleApprovePurchase}
               onReject={handleRejectPurchase}
             />
+          </TabsContent>
+          
+          <TabsContent value="reminders" className="space-y-6">
+            <ReminderSystem />
           </TabsContent>
         </Tabs>
       </main>
