@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Badge } from "@/components/ui/badge"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
+import { getEquipmentIcon, getEquipmentTypeLabel } from "@/lib/equipment-icons"
 import type { Equipment } from "./EquipmentDialog"
 
 interface EquipmentListProps {
@@ -77,7 +78,12 @@ export function EquipmentList({ equipments, onEdit, onDelete }: EquipmentListPro
             <SelectContent>
               <SelectItem value="all">Todos</SelectItem>
               {uniqueTypes.map(type => (
-                <SelectItem key={type} value={type}>{type}</SelectItem>
+                <SelectItem key={type} value={type}>
+                  <div className="flex items-center gap-2">
+                    {getEquipmentIcon(type)}
+                    {getEquipmentTypeLabel(type)}
+                  </div>
+                </SelectItem>
               ))}
             </SelectContent>
           </Select>
@@ -118,9 +124,12 @@ export function EquipmentList({ equipments, onEdit, onDelete }: EquipmentListPro
               
               <CardContent className="space-y-3">
                 <div className="space-y-2 text-sm">
-                  <div className="flex justify-between">
-                    <span className="text-muted-foreground">Tipo:</span>
-                    <span className="font-medium">{equipment.type}</span>
+                  <div className="flex items-center justify-between">
+                    <div className="flex items-center gap-2">
+                      {getEquipmentIcon(equipment.type)}
+                      <span className="text-muted-foreground">Tipo:</span>
+                    </div>
+                    <span className="font-medium">{getEquipmentTypeLabel(equipment.type)}</span>
                   </div>
                   <div className="flex justify-between">
                     <span className="text-muted-foreground">Serial:</span>

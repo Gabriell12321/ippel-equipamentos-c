@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Badge } from "@/components/ui/badge"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
+import { getEquipmentIcon, getEquipmentTypeLabel } from "@/lib/equipment-icons"
 import type { PurchaseRequest } from "./PurchaseDialog"
 
 interface PurchaseListProps {
@@ -120,8 +121,9 @@ export function PurchaseList({ requests, onApprove, onReject }: PurchaseListProp
                     <CardTitle className="text-lg font-semibold text-foreground mb-1">
                       {request.equipmentName}
                     </CardTitle>
-                    <p className="text-sm text-muted-foreground">
-                      {request.type} • {request.quantity} unidade(s)
+                    <p className="text-sm text-muted-foreground flex items-center gap-2">
+                      {getEquipmentIcon(request.type)}
+                      {getEquipmentTypeLabel(request.type)} • {request.quantity} unidade(s)
                     </p>
                   </div>
                   <div className="flex flex-col gap-2">
