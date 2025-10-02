@@ -53,6 +53,11 @@
 - **Propósito**: Garantir revisões mensais sistemáticas sem dependência de memória humana
 - **Critério de sucesso**: Lembretes aparecem automaticamente no dia 20 e são registrados no histórico
 
+### 5. Escaneamento de Rede
+- **Funcionalidade**: Descoberta automática de dispositivos na rede local com status online/offline, detecção de tipos de equipamento
+- **Propósito**: Facilitar identificação e catalogação de equipamentos conectados à rede
+- **Critério de sucesso**: Identificação eficiente de dispositivos ativos na rede com informações de IP, hostname e tipo
+
 ## Design Direction
 
 ### Visual Tone & Identity

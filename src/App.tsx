@@ -9,6 +9,7 @@ import { EquipmentDialog, type Equipment } from "@/components/EquipmentDialog"
 import { PurchaseList } from "@/components/PurchaseList"
 import { PurchaseDialog, type PurchaseRequest } from "@/components/PurchaseDialog"
 import { ReminderSystem } from "@/components/ReminderSystem"
+import { NetworkScanner } from "@/components/NetworkScanner"
 import { toast } from "sonner"
 
 function App() {
@@ -99,12 +100,15 @@ function App() {
         <DashboardStats {...stats} />
         
         <Tabs defaultValue="equipments" className="space-y-6">
-          <TabsList className="grid w-full grid-cols-3 lg:w-auto lg:max-w-lg mx-auto bg-muted/50">
+          <TabsList className="grid w-full grid-cols-4 lg:w-auto lg:max-w-2xl mx-auto bg-muted/50">
             <TabsTrigger value="equipments" className="data-[state=active]:bg-white data-[state=active]:shadow-sm">
               Equipamentos
             </TabsTrigger>
             <TabsTrigger value="purchases" className="data-[state=active]:bg-white data-[state=active]:shadow-sm">
               Solicitações
+            </TabsTrigger>
+            <TabsTrigger value="network" className="data-[state=active]:bg-white data-[state=active]:shadow-sm">
+              Rede
             </TabsTrigger>
             <TabsTrigger value="reminders" className="data-[state=active]:bg-white data-[state=active]:shadow-sm">
               Lembretes
@@ -124,6 +128,10 @@ function App() {
               requests={purchaseRequests || []}
               onDelete={handleDeletePurchaseRequest}
             />
+          </TabsContent>
+          
+          <TabsContent value="network" className="space-y-6">
+            <NetworkScanner />
           </TabsContent>
           
           <TabsContent value="reminders" className="space-y-6">
