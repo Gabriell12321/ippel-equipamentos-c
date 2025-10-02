@@ -271,7 +271,7 @@ export function EquipmentDialog({ open, onOpenChange, onSave, equipment }: Equip
               <Label htmlFor="type">Tipo *</Label>
               <Select
                 value={formData.type}
-                onValueChange={(value: EquipmentType) => setFormData(prev => ({ ...prev, type: value }))}
+                onValueChange={(value) => setFormData(prev => ({ ...prev, type: value as EquipmentType }))}
               >
                 <SelectTrigger>
                   <SelectValue placeholder="Selecione o tipo" />
