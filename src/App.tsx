@@ -50,39 +50,27 @@ function App() {
     }
   }
 
-  const handleSavePurchaseRequest = (requestData: Omit<PurchaseRequest, "id" | "status" | "requestDate">) => {
+  const handleSavePurchaseRequest = (requestData: Omit<PurchaseRequest, "id" | "requestDate">) => {
     const newRequest: PurchaseRequest = {
       ...requestData,
       id: Date.now().toString(),
-      status: "pending",
       requestDate: new Date().toISOString()
     }
     setPurchaseRequests(currentRequests => [...(currentRequests || []), newRequest])
     toast.success("Solicitação de compra criada!")
   }
 
-  const handleApprovePurchase = (id: string) => {
-    setPurchaseRequests(currentRequests =>
-      (currentRequests || []).map(req =>
-        req.id === id ? { ...req, status: "approved" as const } : req
-      )
-    )
-    toast.success("Solicitação aprovada!")
-  }
-
-  const handleRejectPurchase = (id: string) => {
-    setPurchaseRequests(currentRequests =>
-      (currentRequests || []).map(req =>
-        req.id === id ? { ...req, status: "rejected" as const } : req
-      )
-    )
-    toast.success("Solicitação rejeitada!")
+  const handleDeletePurchaseRequest = (id: string) => {
+    if (confirm("Tem certeza que deseja excluir esta solicitação?")) {
+      setPurchaseRequests(currentRequests => (currentRequests || []).filter(req => req.id !== id))
+      toast.success("Solicitação removida!")
+    }
   }
 
   const stats = {
     totalEquipments: (equipments || []).length,
-    pendingPurchases: (purchaseRequests || []).filter(req => req.status === "pending").length,
-    approvedPurchases: (purchaseRequests || []).filter(req => req.status === "approved").length,
+    totalPurchases: (purchaseRequests || []).length,
+    highPriorityPurchases: (purchaseRequests || []).filter(req => req.priority === "high").length,
     inMaintenanceCount: (equipments || []).filter(eq => eq.status === "maintenance").length
   }
 
@@ -117,8 +105,7 @@ function App() {
           <TabsContent value="purchases" className="space-y-6">
             <PurchaseList 
               requests={purchaseRequests || []}
-              onApprove={handleApprovePurchase}
-              onReject={handleRejectPurchase}
+              onDelete={handleDeletePurchaseRequest}
             />
           </TabsContent>
           

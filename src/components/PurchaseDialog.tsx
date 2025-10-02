@@ -46,7 +46,6 @@ export interface PurchaseRequest {
   estimatedPrice: string
   justification: string
   priority: "low" | "medium" | "high"
-  status: "pending" | "approved" | "rejected"
   requestDate: string
   requester: string
 }
@@ -54,11 +53,11 @@ export interface PurchaseRequest {
 interface PurchaseDialogProps {
   open: boolean
   onOpenChange: (open: boolean) => void
-  onSave: (request: Omit<PurchaseRequest, "id" | "status" | "requestDate">) => void
+  onSave: (request: Omit<PurchaseRequest, "id" | "requestDate">) => void
 }
 
 export function PurchaseDialog({ open, onOpenChange, onSave }: PurchaseDialogProps) {
-  const [formData, setFormData] = useState<Omit<PurchaseRequest, "id" | "status" | "requestDate">>({
+  const [formData, setFormData] = useState<Omit<PurchaseRequest, "id" | "requestDate">>({
     equipmentName: "",
     type: "",
     quantity: 1,

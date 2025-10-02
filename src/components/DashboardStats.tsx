@@ -3,15 +3,15 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 
 interface DashboardStatsProps {
   totalEquipments: number
-  pendingPurchases: number
-  approvedPurchases: number
+  totalPurchases: number
+  highPriorityPurchases: number
   inMaintenanceCount: number
 }
 
 export function DashboardStats({ 
   totalEquipments, 
-  pendingPurchases, 
-  approvedPurchases, 
+  totalPurchases, 
+  highPriorityPurchases, 
   inMaintenanceCount 
 }: DashboardStatsProps) {
   const stats = [
@@ -23,23 +23,23 @@ export function DashboardStats({
       bgColor: "bg-primary/10"
     },
     {
-      title: "Solicitações Pendentes",
-      value: pendingPurchases,
+      title: "Total de Solicitações",
+      value: totalPurchases,
       icon: Clock,
       color: "text-orange-600",
       bgColor: "bg-orange-100"
     },
     {
-      title: "Compras Aprovadas",
-      value: approvedPurchases,
-      icon: CheckCircle,
+      title: "Prioridade Alta",
+      value: highPriorityPurchases,
+      icon: ShoppingCart,
       color: "text-accent",
       bgColor: "bg-accent/10"
     },
     {
       title: "Em Manutenção",
       value: inMaintenanceCount,
-      icon: ShoppingCart,
+      icon: CheckCircle,
       color: "text-blue-600",
       bgColor: "bg-blue-100"
     }
